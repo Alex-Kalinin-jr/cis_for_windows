@@ -4,11 +4,19 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 
+#preparation step
+Get-NetFirewallRule | Remove-NetFirewallRule
+
 # Step 1: Enable Windows Firewall
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
 
 # Step 2: Block all incoming connections (default deny)
 Set-NetFirewallProfile -Profile Domain,Public,Private -DefaultInboundAction Block
+
+
+
+
+
 
 # Step 3: Allow all outgoing connections
 Set-NetFirewallProfile -Profile Domain,Public,Private -DefaultOutboundAction Allow
@@ -32,4 +40,11 @@ Write-Host "Firewall configuration completed. Current settings:" -ForegroundColo
 Get-NetFirewallProfile | Format-Table Name, Enabled, DefaultInboundAction, DefaultOutboundAction, LogAllowed, LogBlocked, LogFileName -AutoSize
 
 Write-Host "Firewall logs will be saved to $LogPath" -ForegroundColor Yellow
+
+# Step 8: turning off the smb
+Set-SmbServerConfiguration -EnableSMB1Protocol $false
+Set-SmbServerConfiguration -EnableSMB2Protocol $false
+Stop-Service -Name "LanmanServer" -Force
+Set-Service -Name "LanmanServer" -StartupType Disabled
+
 Write-Host "Script execution completed successfully." -ForegroundColor Green
