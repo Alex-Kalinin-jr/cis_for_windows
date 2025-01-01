@@ -41,10 +41,19 @@ Get-NetFirewallProfile | Format-Table Name, Enabled, DefaultInboundAction, Defau
 
 Write-Host "Firewall logs will be saved to $LogPath" -ForegroundColor Yellow
 
-# Step 8: turning off the smb
+#Step 8 : Enabling ASR rules
+#       Block abuse of exploited vulnerable signed drivers
+Add-MpPreference -AttackSurfaceReductionRules_Ids 56a863a9-875e-4185-98a7-b882c64b5ce5 -AttackSurfaceReductionRules_Actions Warn
+#       Block Office applications from creating executable content
+Add-MpPreference -AttackSurfaceReductionRules_Ids 3b576869-a4ec-4529-8536-b80a7769e899 -AttackSurfaceReductionRules_Actions Warn
+#       Block all Office applications from creating child processes
+Add-MpPreference -AttackSurfaceReductionRules_Ids d4f940ab-401b-4efc-aadc-ad5f3c50688a -AttackSurfaceReductionRules_Actions Warn
+#       Block untrusted and unsigned processes that run from USB
+Add-MpPreference -AttackSurfaceReductionRules_Ids d4f940ab-401b-4efc-aadc-ad5f3c50688a -AttackSurfaceReductionRules_Actions Warn
+
+# Step {{}}: turning off the smb
 Set-SmbServerConfiguration -EnableSMB1Protocol $false
 Set-SmbServerConfiguration -EnableSMB2Protocol $false
 Stop-Service -Name "LanmanServer" -Force
 Set-Service -Name "LanmanServer" -StartupType Disabled
-
 Write-Host "Script execution completed successfully." -ForegroundColor Green
