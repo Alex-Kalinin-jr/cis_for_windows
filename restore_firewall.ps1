@@ -27,4 +27,19 @@ Get-NetFirewallRule | Remove-NetFirewallRule -ErrorAction SilentlyContinue
 Write-Host "Firewall settings restored to default. Current configuration:" -ForegroundColor Cyan
 Get-NetFirewallProfile | Format-Table Name, Enabled, DefaultInboundAction, DefaultOutboundAction, LogAllowed, LogBlocked, LogFileName -AutoSize
 
+
+# for step 9: RESTORING GEOLOCATION.
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Value "Allow"
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Value 1
+
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableLocation"
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableLocationScripting"
+
+Set-Service -Name "lfsvc" -StartupType Manually
+Start-Service -Name "lfsvc"
+
+Set-Service -Name "SensorService" -StartupType Manually
+Start-Service -Name "SensorService"
+
+
 Write-Host "Firewall has been reset to its default configuration." -ForegroundColor Green

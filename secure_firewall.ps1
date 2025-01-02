@@ -13,11 +13,6 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
 # Step 2: Block all incoming connections (default deny)
 Set-NetFirewallProfile -Profile Domain,Public,Private -DefaultInboundAction Block
 
-
-
-
-
-
 # Step 3: Allow all outgoing connections
 Set-NetFirewallProfile -Profile Domain,Public,Private -DefaultOutboundAction Allow
 
@@ -41,7 +36,8 @@ Get-NetFirewallProfile | Format-Table Name, Enabled, DefaultInboundAction, Defau
 
 Write-Host "Firewall logs will be saved to $LogPath" -ForegroundColor Yellow
 
-#Step 8 : Enabling ASR rules
+# Step 8 : ENABLING ASR RULES
+# for details go to https://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-reference#attack-surface-reduction-rules-by-type
 #       Block abuse of exploited vulnerable signed drivers
 Add-MpPreference -AttackSurfaceReductionRules_Ids 56a863a9-875e-4185-98a7-b882c64b5ce5 -AttackSurfaceReductionRules_Actions Warn
 #       Block Office applications from creating executable content
@@ -62,6 +58,30 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids 3b576869-a4ec-4529-8536-b80a77
 Add-MpPreference -AttackSurfaceReductionRules_Ids 75668c1f-73b5-4cf0-bb93-3ecf5cb7cc84 -AttackSurfaceReductionRules_Actions Enabled
 #       Use advanced protection against ransomware
 Add-MpPreference -AttackSurfaceReductionRules_Ids c1db55ab-c21a-4637-bb3f-a12568109d35 -AttackSurfaceReductionRules_Actions Enabled
+
+
+# Step 9: DISABLING GEOLOCATION CHECK
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Value "Deny"
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Value 0
+
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableLocation" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableLocationScripting" /t REG_DWORD /d "1" /f
+
+New-NetFirewallRule -DisplayName "Block Location Services" -Direction Outbound -Program "%SystemRoot%\System32\lfsvc.dll" -Action Block
+New-NetFirewallRule -DisplayName "Block Location Services Inbound" -Direction Inbound -Program "%SystemRoot%\System32\lfsvc.dll" -Action Block
+
+reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "DefaultGeolocationSetting" /t REG_DWORD /d "2" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "DefaultGeolocationSetting" /t REG_DWORD /d "2" /f
+
+Stop-Service -Name "SensorService" -Force
+Set-Service -Name "SensorService" -StartupType Disabled
+
+Stop-Service -Name "lfsvc" -Force
+Set-Service -Name "lfsvc" -StartupType Disabled
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Value "Deny"
+
+
+
 
 # Step {{}}: turning off the smb
 Set-SmbServerConfiguration -EnableSMB1Protocol $false
