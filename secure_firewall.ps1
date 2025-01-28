@@ -61,27 +61,36 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids c1db55ab-c21a-4637-bb3f-a12568
 
 
 # Step 9: DISABLING GEOLOCATION CHECK
+#   a
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Value "Deny"
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Value 0
-
+#   b
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableLocation" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableLocationScripting" /t REG_DWORD /d "1" /f
-
+#   c
 New-NetFirewallRule -DisplayName "Block Location Services" -Direction Outbound -Program "%SystemRoot%\System32\lfsvc.dll" -Action Block
 New-NetFirewallRule -DisplayName "Block Location Services Inbound" -Direction Inbound -Program "%SystemRoot%\System32\lfsvc.dll" -Action Block
-
+#   d
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "DefaultGeolocationSetting" /t REG_DWORD /d "2" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "DefaultGeolocationSetting" /t REG_DWORD /d "2" /f
-
+#   e
 Stop-Service -Name "SensorService" -Force
 Set-Service -Name "SensorService" -StartupType Disabled
-
+#   f
 Stop-Service -Name "lfsvc" -Force
 Set-Service -Name "lfsvc" -StartupType Disabled
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Value "Deny"
-
-
-
+#   g
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "NoActiveProbe" /t REG_DWORD /d "1" /f
+#   j
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "DisableRandom" /t REG_DWORD /d "0" /f
+#   k
+reg add "HKLM\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d "0" /f
+#   m
+Stop-Service -Name "SensorDataService" -Force
+Set-Service -Name "SensorDataService" -StartupType Disabled
+#   n
+Stop-Service -Name "WAP Push Message Routing Service" -Force
+Set-Service -Name "WAP Push Message Routing Service" -StartupType Disabled
 
 # Step {{}}: turning off the smb
 Set-SmbServerConfiguration -EnableSMB1Protocol $false

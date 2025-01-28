@@ -29,17 +29,27 @@ Get-NetFirewallProfile | Format-Table Name, Enabled, DefaultInboundAction, Defau
 
 
 # for step 9: RESTORING GEOLOCATION.
+#   a
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Value "Allow"
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Value 1
-
+#   b
 Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableLocation"
 Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableLocationScripting"
-
-Set-Service -Name "lfsvc" -StartupType Manually
-Start-Service -Name "lfsvc"
-
+#   e
 Set-Service -Name "SensorService" -StartupType Manually
 Start-Service -Name "SensorService"
-
-
+#   f
+Set-Service -Name "lfsvc" -StartupType Manually
+Start-Service -Name "lfsvc"
+#   g
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "NoActiveProbe" /t REG_DWORD /d "0" /f
+#   j
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "DisableRandom" /t REG_DWORD /d "1" /f
+#   k
+reg add "HKLM\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d "1" /f
 Write-Host "Firewall has been reset to its default configuration." -ForegroundColor Green
+#   m
+Set-Service -Name "SensorDataService" -StartupType Manually
+Start-Service -Name "SensorDataService"
+#   n
+Set-Service -Name "WAP Push Message Routing Service" -StartupType Manually
