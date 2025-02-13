@@ -17,7 +17,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 # also ensure that the line:
 # SeTcbPrivilege = 
 # is empty. This line is responsible for 'Act as part of the operating system' option.
-# then run the command
+# then run the command  
 #       secedit /configure /db secedit.sdb /cfg C:\SecPol.cfg /areas USER_RIGHTS
 # to verify changes just write:
 # "whoami /priv"
