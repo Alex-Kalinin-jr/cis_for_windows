@@ -49,7 +49,62 @@ Try {
 }
 
 
+# 2.3.1.4
+# Enable the policy: Limit blank password use to console logon only
+Write-Host "Enforcing 'Limit local account use of blank passwords to console logon only' policy..." -ForegroundColor Yellow
+Try {
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LimitBlankPasswordUse" -Value 1
+    Write-Host "Policy successfully enforced." -ForegroundColor Green
+} Catch {
+    Write-Host "Error: Unable to enforce the policy. Ensure the script is running as Administrator." -ForegroundColor Red
+}
 
+
+# 2.3.1.5
+# Run this script as an Administrator
+# Rename the built-in Administrator account
+
+# Define the new name for the Administrator account
+$NewAdminName = "Dadmin"  # Change this to your preferred name
+$NewDescription = "System Management Account of my testing pc"
+$AdminAccount = Get-WmiObject Win32_UserAccount | Where-Object { $_.SID -like "*-500" }
+
+if ($AdminAccount) {
+    # Rename the Administrator account
+    Rename-LocalUser -Name $AdminAccount.Name -NewName $NewAdminName
+    Write-Output "Administrator account renamed to: $NewAdminName"
+
+    # Update the account description
+    Get-LocalUser -Name $NewAdminName | Set-LocalUser -Description $NewDescription
+    Write-Output "Administrator account description updated."
+
+    # Confirm the changes
+    Get-LocalUser | Where-Object { $_.SID -like "*-500" } | Select-Object Name, Description
+} else {
+    Write-Output "The built-in Administrator account was not found or is disabled."
+}
+
+# 2.3.1.6
+# Define the new name for the Guest account
+$NewGuestName = "Dguest"  # Change this to your preferred name
+$NewDescription = "Limited access guest account for my notebook"
+
+$GuestAccount = Get-WmiObject Win32_UserAccount | Where-Object { $_.SID -like "*-501" }
+
+if ($GuestAccount) {
+    # Rename the Guest account
+    Rename-LocalUser -Name $GuestAccount.Name -NewName $NewGuestName
+    Write-Output "Guest account renamed to: $NewGuestName"
+
+    # Update the account description
+    Get-LocalUser -Name $NewGuestName | Set-LocalUser -Description $NewDescription
+    Write-Output "Guest account description updated."
+
+    # Confirm the changes
+    Get-LocalUser | Where-Object { $_.SID -like "*-501" } | Select-Object Name, Description
+} else {
+    Write-Output "The built-in Guest account was not found or is disabled."
+}
 
 
 # 2.3.2.1
