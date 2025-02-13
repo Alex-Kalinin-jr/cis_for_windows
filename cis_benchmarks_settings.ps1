@@ -25,9 +25,9 @@ Set-ItemProperty -Path $RegPath -Name $RegName -Value $RegValue -Type DWord
 # Confirm the setting was applied
 $AppliedValue = (Get-ItemProperty -Path $RegPath -Name $RegName).$RegName
 if ($AppliedValue -eq $RegValue) {
-    Write-Host "✅ Successfully set 'Accounts: Block Microsoft accounts' to the recommended value ($RegValue)."
+    Write-Host "Successfully set 'Accounts: Block Microsoft accounts' to the recommended value ($RegValue)."
 } else {
-    Write-Host "❌ Failed to apply the setting. Please check manually."
+    Write-Host "Failed to apply the setting. Please check manually."
 }
 
 # Force policy update (not needed on Home edition, but safe to run)
@@ -35,7 +35,20 @@ Write-Host "Applying changes..."
 Stop-Process -Name explorer -Force
 Start-Process explorer
 
-Write-Host "✅ Script execution completed. Restart may be required."
+
+
+# 2.3.1.3
+# Disable the Guest account
+$GuestAccount = "Dguest"
+Write-Host "Disabling the Guest account..." -ForegroundColor Yellow
+Try {
+    Get-LocalUser -Name $GuestAccount | Disable-LocalUser
+    Write-Host "Guest account has been successfully disabled." -ForegroundColor Green
+} Catch {
+    Write-Host "Error: Unable to disable the Guest account. Ensure the script is running as Administrator." -ForegroundColor Red
+}
+
+
 
 
 
@@ -54,3 +67,5 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 # 2.3.7.2
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DontDisplayLastUserName" -Value 1
 
+
+Write-Host "✅ Script execution completed. Restart may be required."
