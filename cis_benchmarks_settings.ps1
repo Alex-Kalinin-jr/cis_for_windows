@@ -123,7 +123,7 @@ if (-not (Test-Path $RegistryPath)) {
 # Set the registry value to enable the policy
 try {
     Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
-    Write-Host "$CISNumber - 'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings' has been set to 'Enabled'." -ForegroundColor Green
+    Write-Host "$CISNumber - successful" -ForegroundColor Green
 } catch {
     Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
 }
@@ -131,17 +131,12 @@ try {
 # Confirm the change
 $CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
 if ($CurrentValue -eq $RegistryValue) {
-    Write-Host "$CISNumber - The policy of is successfully configured to 'Enabled'." -ForegroundColor Green
+    Write-Host "$CISNumber - successful" -ForegroundColor Green
+
 } else {
-    Write-Host "$CISNumber - Failed to verify the policy configuration." -ForegroundColor Red
+    Write-Host "$CISNumber - Failed" -ForegroundColor Red
+
 }
-
-
-# 2.3.2.x - HERE HFERE HERE
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers" -Name "AddPrinterDrivers" -Value 0
-
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableCAD" -Value 0
-
 
 
 # 2.3.2.2
@@ -159,7 +154,6 @@ if (-not (Test-Path $RegistryPath)) {
 # Set the registry value to enable the policy
 try {
     Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
-    Write-Host "$CISNumber - 'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings' has been set to 'Enabled'." -ForegroundColor Green
 } catch {
     Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
 }
@@ -167,18 +161,130 @@ try {
 # Confirm the change
 $CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
 if ($CurrentValue -eq $RegistryValue) {
-    Write-Host "$CISNumber - The policy of is successfully configured to 'Enabled'." -ForegroundColor Green
+    Write-Host "$CISNumber - successful" -ForegroundColor Green
+
 } else {
-    Write-Host "$CISNumber - Failed to verify the policy configuration." -ForegroundColor Red
+    Write-Host "$CISNumber - Failed" -ForegroundColor Red
+
 }
 
 
+# 2.3.4.1
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers"
+$RegistryName = "AddPrinterDrivers"
+$RegistryValue = 0
+$CISNumber = "2.3.4.1"
+
+# Check if the registry key exists
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "$CISNumber - Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+# Set the registry value to enable the policy
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
+} catch {
+    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+# Confirm the change
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $RegistryValue) {
+    Write-Host "$CISNumber - successful" -ForegroundColor Green
+
+} else {
+    Write-Host "$CISNumber - Failed" -ForegroundColor Red
+
+}
 
 
+# 2.3.7.1
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+$RegistryName = "DisableCAD"
+$RegistryValue = 0
+$CISNumber = "2.3.7.1"
+
+# Check if the registry key exists
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "$CISNumber - Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+# Set the registry value to enable the policy
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
+} catch {
+    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+# Confirm the change
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $RegistryValue) {
+    Write-Host "$CISNumber - successful" -ForegroundColor Green
+
+} else {
+    Write-Host "$CISNumber - Failed" -ForegroundColor Red
+
+}
 
 
 # 2.3.7.2
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DontDisplayLastUserName" -Value 1
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+$RegistryName = "DontDisplayLastUserName"
+$RegistryValue = 1
+$CISNumber = "2.3.7.2"
+
+# Check if the registry key exists
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "$CISNumber - Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+# Set the registry value to enable the policy
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
+    Write-Host "$CISNumber - successful" -ForegroundColor Green
+} catch {
+    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+# Confirm the change
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $RegistryValue) {
+    Write-Host "$CISNumber - successful" -ForegroundColor Green
+
+} else {
+    Write-Host "$CISNumber - Failed" -ForegroundColor Red
+
+}
+
+
+#2.3.7.4
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+$RegistryName = "InactivityTimeoutSecs"
+$DesiredValue = 600  # Replace with a value of 900 or fewer seconds, but not 0
+$CISNumber = "2.3.7.2"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+# Set the registry value
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+# Confirm the change
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CISNumber - successful"
+} else {
+    Write-Host "Failed to verify the policy configuration." -ForegroundColor Red
+}
 
 
 Write-Host "✅ Script execution completed. Restart may be required."
