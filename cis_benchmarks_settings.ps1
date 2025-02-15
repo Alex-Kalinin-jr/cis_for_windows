@@ -107,17 +107,75 @@ if ($GuestAccount) {
 }
 
 
-# 2.3.2.1
-Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa" -Name "SCENoApplyLegacyAuditPolicy" -Value 1
+#2.3.2.1
+# Define the registry path and value
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+$RegistryName = "SCENoApplyLegacyAuditPolicy"
+$RegistryValue = 1
+$CISNumber = "2.3.2.1"
 
-# 2.3.2.2
-Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa" -Name "CrashOnAuditFail" -Value 0
+# Check if the registry key exists
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
 
-# 2.3.2.2
+# Set the registry value to enable the policy
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
+    Write-Host "$CISNumber - 'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings' has been set to 'Enabled'." -ForegroundColor Green
+} catch {
+    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+# Confirm the change
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $RegistryValue) {
+    Write-Host "$CISNumber - The policy of is successfully configured to 'Enabled'." -ForegroundColor Green
+} else {
+    Write-Host "$CISNumber - Failed to verify the policy configuration." -ForegroundColor Red
+}
+
+
+# 2.3.2.x - HERE HFERE HERE
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers" -Name "AddPrinterDrivers" -Value 0
 
-# 2.3.2.2
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableCAD" -Value 0
+
+
+
+# 2.3.2.2
+$RegistryPath = "HKLM:\System\CurrentControlSet\Control\Lsa"
+$RegistryName = "CrashOnAuditFail"
+$RegistryValue = 0
+$CISNumber = "2.3.2.2"
+
+# Check if the registry key exists
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "$CISNumber - Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+# Set the registry value to enable the policy
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
+    Write-Host "$CISNumber - 'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings' has been set to 'Enabled'." -ForegroundColor Green
+} catch {
+    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+# Confirm the change
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $RegistryValue) {
+    Write-Host "$CISNumber - The policy of is successfully configured to 'Enabled'." -ForegroundColor Green
+} else {
+    Write-Host "$CISNumber - Failed to verify the policy configuration." -ForegroundColor Red
+}
+
+
+
+
+
 
 # 2.3.7.2
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DontDisplayLastUserName" -Value 1
