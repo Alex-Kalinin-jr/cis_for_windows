@@ -278,6 +278,7 @@ try {
     Write-Host "Failed to set the registry value. Error: $_" -ForegroundColor Red
 }
 
+
 # Confirm the change
 $CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
 if ($CurrentValue -eq $DesiredValue) {
