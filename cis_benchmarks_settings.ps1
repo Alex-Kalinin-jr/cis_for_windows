@@ -394,5 +394,33 @@ if ($CurrentValue -eq $DesiredValue) {
 }
 
 
+# 2.3.8.3
+# Define the registry path and value
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters"
+$RegistryName = "EnablePlainTextPassword"
+$DesiredValue = 0  # 0 = Disabled, 1 = Enabled
+$CisNumber = "2.3.8.3"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CisNumber - success" -ForegroundColor Green
+} else {
+    Write-Host "$CisNumber - fail" -ForegroundColor Red
+}
+
+
+
+
 
 Write-Host "✅ Script execution completed. Restart may be required."
