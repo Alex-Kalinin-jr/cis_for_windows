@@ -284,8 +284,36 @@ $CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Selec
 if ($CurrentValue -eq $DesiredValue) {
     Write-Host "$CISNumber - successful"
 } else {
-    Write-Host "Failed to verify the policy configuration." -ForegroundColor Red
+    Write-Host "$CISNumber - failed" -ForegroundColor Red
 }
+
+
+# 2.3.7.5
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+$MessageTextKey = "LegalNoticeText"
+$MessageTextValue = "Are you sure you want to get access to this supermachine, bitch?"
+$CISNumber = "2.3.7.5"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $MessageTextKey -Value $MessageTextValue -Force
+} catch {
+    Write-Host "$CISNumber - Error: $_" -ForegroundColor Red
+}
+
+# Confirm the change
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $MessageTextKey | Select-Object -ExpandProperty $MessageTextKey
+if ($CurrentValue -eq $MessageTextValue) {
+    Write-Host "$CISNumber - successful"
+} else {
+    Write-Host "$CISNumber - failed" -ForegroundColor Red
+}
+
+
 
 
 Write-Host "✅ Script execution completed. Restart may be required."
