@@ -313,6 +313,85 @@ if ($CurrentValue -eq $MessageTextValue) {
     Write-Host "$CISNumber - failed" -ForegroundColor Red
 }
 
+# 2.3.7.7
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+$RegistryName = "PasswordExpiryWarning"
+$DesiredValue = 5  # Set the value to a number between 5 and 14 days (e.g., 10 days)
+$CISNumber = "2.3.7.7"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+# Confirm the change
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CISNumber - success" -ForegroundColor Green
+} else {
+    Write-Host "$CISNumber - fail" -ForegroundColor Red
+}
+
+
+# 2.3.7.8 - TO BE IMPLEMENTED
+
+
+# 2.3.8.1
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters"
+$RegistryName = "RequireSecuritySignature"
+$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$CisNumber = "2.3.8.1"
+
+# Check if the registry path exists, create it if it doesn't
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+# Set the registry value
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CisNumber - success" -ForegroundColor Green
+} else {
+    Write-Host "$CisNumber - fail" -ForegroundColor Red
+}
+
+
+#2.3.8.2
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters"
+$RegistryName = "EnableSecuritySignature"
+$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$CisNumber = "2.3.8.2"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CisNumber - success" -ForegroundColor Green
+} else {
+    Write-Host "$CisNumber - fail" -ForegroundColor Red
+}
 
 
 
