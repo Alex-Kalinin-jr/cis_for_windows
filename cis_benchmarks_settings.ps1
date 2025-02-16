@@ -3,38 +3,79 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 
-#2.3.1.2
-# Ensure the script runs with Administrator privileges
-$ErrorActionPreference = "Stop"
 
-# Define the registry path and key
-$RegPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
-$RegName = "NoConnectedUser"
-$RegValue = 3  # Users can't add or log on with Microsoft accounts
+# Function to check and create registry path if missing
+function Ensure-RegistryPath {
+    param (
+        [string]$Path
+    )
 
-# Check if the registry key exists
-if (!(Test-Path $RegPath)) {
-    Write-Host "Creating registry path: $RegPath"
-    New-Item -Path $RegPath -Force | Out-Null
+    if (-not (Test-Path $Path)) {
+        Write-Host "$CisNumber - Registry path not found: $Path. Creating it..." -ForegroundColor Yellow
+        try {
+            New-Item -Path $Path -Force | Out-Null
+        } catch {
+            Write-Host "$CisNumber - Failed to create registry path. Error: $_" -ForegroundColor Red
+        }
+    }
 }
 
-# Set the registry value
-Write-Host "Setting $RegName to $RegValue in $RegPath"
-Set-ItemProperty -Path $RegPath -Name $RegName -Value $RegValue -Type DWord
 
-# Confirm the setting was applied
-$AppliedValue = (Get-ItemProperty -Path $RegPath -Name $RegName).$RegName
-if ($AppliedValue -eq $RegValue) {
-    Write-Host "Successfully set 'Accounts: Block Microsoft accounts' to the recommended value ($RegValue)."
-} else {
-    Write-Host "Failed to apply the setting. Please check manually."
+# Function to set registry value
+function Set-RegistryValue {
+    param (
+        [Parameter(Mandatory)]
+        [string]$Path,
+        [Parameter(Mandatory)]
+        [string]$Name,
+        [Parameter(Mandatory)]
+        [int]$Value,
+        [switch]$AsDWord  # Parameter to explicitly set DWORD type
+    )
+
+    try {
+        if ($AsDWord) {
+            Set-ItemProperty -Path $Path -Name $Name -Value $Value -Type DWord -Force
+            Write-Host "Registry value '$Name' set to '$Value' (DWORD) at path '$Path'" -ForegroundColor Green
+        } else {
+            Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
+            Write-Host "Registry value '$Name' set to '$Value' at path '$Path'" -ForegroundColor Green
+        }
+    } catch {
+        Write-Error "Failed to set registry value '$Name' at path '$Path'. Error: $_"
+    }
 }
 
-# Force policy update (not needed on Home edition, but safe to run)
-Write-Host "Applying changes..."
-Stop-Process -Name explorer -Force
-Start-Process explorer
 
+# Function to verify registry value
+function Verify-RegistryValue {
+    param (
+        [string]$Path,
+        [string]$Name,
+        [int]$ExpectedValue
+    )
+    $CurrentValue = Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $Name
+
+    if ($CurrentValue -eq $ExpectedValue) {
+        Write-Host "$CisNumber - Success" -ForegroundColor Green
+    } else {
+        Write-Host "$CisNumber - Fail" -ForegroundColor Red
+    }
+}
+
+
+$CisNumber = "2.3.1.2"
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+$RegistryName = "NoConnectedUser"
+$RegistryValue = 3  # Users can't add or log on with Microsoft accounts
+
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+} catch {
+    Write-Host "!!!" -ForegroundColor red
+}
 
 
 # 2.3.1.3
@@ -112,60 +153,44 @@ if ($GuestAccount) {
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
 $RegistryName = "SCENoApplyLegacyAuditPolicy"
 $RegistryValue = 1
-$CISNumber = "2.3.2.1"
+$CisNumber = "2.3.2.1"
 
-# Check if the registry key exists
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
-# Set the registry value to enable the policy
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
-    Write-Host "$CISNumber - successful" -ForegroundColor Green
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
-# Confirm the change
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $RegistryValue) {
-    Write-Host "$CISNumber - successful" -ForegroundColor Green
 
-} else {
-    Write-Host "$CISNumber - Failed" -ForegroundColor Red
 
-}
+
+
+
+
+
+
+
+
+
+
 
 
 # 2.3.2.2
 $RegistryPath = "HKLM:\System\CurrentControlSet\Control\Lsa"
 $RegistryName = "CrashOnAuditFail"
 $RegistryValue = 0
-$CISNumber = "2.3.2.2"
+$CisNumber = "2.3.2.2"
 
-# Check if the registry key exists
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "$CISNumber - Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
-# Set the registry value to enable the policy
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-# Confirm the change
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $RegistryValue) {
-    Write-Host "$CISNumber - successful" -ForegroundColor Green
-
-} else {
-    Write-Host "$CISNumber - Failed" -ForegroundColor Red
-
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
@@ -173,29 +198,14 @@ if ($CurrentValue -eq $RegistryValue) {
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers"
 $RegistryName = "AddPrinterDrivers"
 $RegistryValue = 0
-$CISNumber = "2.3.4.1"
-
-# Check if the registry key exists
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "$CISNumber - Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
-# Set the registry value to enable the policy
+$CisNumber = "2.3.4.1"
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-# Confirm the change
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $RegistryValue) {
-    Write-Host "$CISNumber - successful" -ForegroundColor Green
-
-} else {
-    Write-Host "$CISNumber - Failed" -ForegroundColor Red
-
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
@@ -203,29 +213,14 @@ if ($CurrentValue -eq $RegistryValue) {
 $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
 $RegistryName = "DisableCAD"
 $RegistryValue = 0
-$CISNumber = "2.3.7.1"
-
-# Check if the registry key exists
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "$CISNumber - Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
-# Set the registry value to enable the policy
+$CisNumber = "2.3.7.1"
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-# Confirm the change
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $RegistryValue) {
-    Write-Host "$CISNumber - successful" -ForegroundColor Green
-
-} else {
-    Write-Host "$CISNumber - Failed" -ForegroundColor Red
-
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
@@ -233,58 +228,29 @@ if ($CurrentValue -eq $RegistryValue) {
 $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
 $RegistryName = "DontDisplayLastUserName"
 $RegistryValue = 1
-$CISNumber = "2.3.7.2"
-
-# Check if the registry key exists
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "$CISNumber - Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
-# Set the registry value to enable the policy
+$CisNumber = "2.3.7.2"
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $RegistryValue -Force
-    Write-Host "$CISNumber - successful" -ForegroundColor Green
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-# Confirm the change
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $RegistryValue) {
-    Write-Host "$CISNumber - successful" -ForegroundColor Green
-
-} else {
-    Write-Host "$CISNumber - Failed" -ForegroundColor Red
-
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
 #2.3.7.4
 $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
 $RegistryName = "InactivityTimeoutSecs"
-$DesiredValue = 600  # Replace with a value of 900 or fewer seconds, but not 0
-$CISNumber = "2.3.7.2"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
-# Set the registry value
+$RegistryValue = 600  # Replace with a value of 900 or fewer seconds, but not 0
+$CisNumber = "2.3.7.2"
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-
-# Confirm the change
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CISNumber - successful"
-} else {
-    Write-Host "$CISNumber - failed" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
@@ -292,50 +258,29 @@ if ($CurrentValue -eq $DesiredValue) {
 $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
 $MessageTextKey = "LegalNoticeText"
 $MessageTextValue = "Are you sure you want to get access to this supermachine, bitch?"
-$CISNumber = "2.3.7.5"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
+$CisNumber = "2.3.7.5"
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $MessageTextKey -Value $MessageTextValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CISNumber - Error: $_" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
-# Confirm the change
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $MessageTextKey | Select-Object -ExpandProperty $MessageTextKey
-if ($CurrentValue -eq $MessageTextValue) {
-    Write-Host "$CISNumber - successful"
-} else {
-    Write-Host "$CISNumber - failed" -ForegroundColor Red
-}
 
 # 2.3.7.7
 $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 $RegistryName = "PasswordExpiryWarning"
-$DesiredValue = 5  # Set the value to a number between 5 and 14 days (e.g., 10 days)
-$CISNumber = "2.3.7.7"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
+$RegistryValue = 5  # Set the value to a number between 5 and 14 days (e.g., 10 days)
+$CisNumber = "2.3.7.7"
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CISNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-# Confirm the change
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CISNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CISNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
@@ -345,52 +290,30 @@ if ($CurrentValue -eq $DesiredValue) {
 # 2.3.8.1
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters"
 $RegistryName = "RequireSecuritySignature"
-$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$RegistryValue = 1  # 1 = Enabled, 0 = Disabled
 $CisNumber = "2.3.8.1"
-
-# Check if the registry path exists, create it if it doesn't
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
-# Set the registry value
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CisNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CisNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
 #2.3.8.2
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters"
 $RegistryName = "EnableSecuritySignature"
-$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$RegistryValue = 1  # 1 = Enabled, 0 = Disabled
 $CisNumber = "2.3.8.2"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CisNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CisNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
@@ -398,155 +321,90 @@ if ($CurrentValue -eq $DesiredValue) {
 # Define the registry path and value
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters"
 $RegistryName = "EnablePlainTextPassword"
-$DesiredValue = 0  # 0 = Disabled, 1 = Enabled
+$RegistryValue = 0  # 0 = Disabled, 1 = Enabled
 $CisNumber = "2.3.8.3"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName | Select-Object -ExpandProperty $RegistryName
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CisNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CisNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
 # 2.3.9.1
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
 $RegistryName = "AutoDisconnect"
-$DesiredValue = 15  # 15 minutes or fewer
+$RegistryValue = 15  # 15 minutes or fewer
 $CisNumber = "2.3.9.1"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
-
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CisNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CisNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
 # 2.3.9.2
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
 $RegistryName = "RequireSecuritySignature"
-$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$RegistryValue = 1  # 1 = Enabled, 0 = Disabled
 $CisNumber = "2.3.9.2"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
-
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CisNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CisNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
 # 2.3.9.3
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
 $RegistryName = "EnableSecuritySignature" # Corrected registry name
-$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$RegistryValue = 1  # 1 = Enabled, 0 = Disabled
 $CisNumber = "2.3.9.3"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
-
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CisNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CisNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
 # 2.3.9.4
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
 $RegistryName = "EnableForcedLogoff"  # Correct registry name
-$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$RegistryValue = 1  # 1 = Enabled, 0 = Disabled
 $CisNumber = "2.3.9.4"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
-
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CisNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CisNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 
 # 2.3.9.5
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
 $RegistryName = "SmbServerNameHardeningLevel"  # Correct registry name
-$DesiredValue = 1  # 1 = Accept if provided by client, 2 = Required from client, 0 = Off
+$RegistryValue = 1  # 1 = Accept if provided by client, 2 = Required from client, 0 = Off
 $CisNumber = "2.3.9.5"
-
-if (-not (Test-Path $RegistryPath)) {
-    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
-    New-Item -Path $RegistryPath -Force | Out-Null
-}
-
 try {
-    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    Write-Host "$CisNumber - success"
 } catch {
-    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-}
-
-$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
-
-if ($CurrentValue -eq $DesiredValue) {
-    Write-Host "$CisNumber - success" -ForegroundColor Green
-} else {
-    Write-Host "$CisNumber - fail" -ForegroundColor Red
+    Write-Host "$CisNumber - fail" -ForegroundColor red
 }
 
 ############################################################################
@@ -557,77 +415,34 @@ if ($CurrentValue -eq $DesiredValue) {
 $CisNumber = "2.3.9.4"
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
 $RegistryName = "EnableForcedLogoff"
-$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
-
-# Function to check and create registry path if missing
-function Ensure-RegistryPath {
-    param (
-        [string]$Path
-    )
-    if (-not (Test-Path $Path)) {
-        Write-Host "$CisNumber - Registry path not found: $Path. Creating it..." -ForegroundColor Yellow
-        try {
-            New-Item -Path $Path -Force | Out-Null
-        } catch {
-            Write-Host "$CisNumber - Failed to create registry path. Error: $_" -ForegroundColor Red
-            exit 1
-        }
-    }
-}
-
-# Function to set registry value
-function Set-RegistryValue {
-    param (
-        [string]$Path,
-        [string]$Name,
-        [int]$Value
-    )
-    try {
-        Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
-    } catch {
-        Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
-        exit 1
-    }
-}
-
-# Function to verify registry value
-function Verify-RegistryValue {
-    param (
-        [string]$Path,
-        [string]$Name,
-        [int]$ExpectedValue
-    )
-    $CurrentValue = Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $Name
-
-    if ($CurrentValue -eq $ExpectedValue) {
-        Write-Host "$CisNumber - Success: '$Name' is set to $ExpectedValue." -ForegroundColor Green
-    } else {
-        Write-Host "$CisNumber - Fail: Expected $ExpectedValue but found $CurrentValue." -ForegroundColor Red
-    }
-}
-
+$RegistryValue = 1  # 1 = Enabled, 0 = Disabled
 try {
     Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $DesiredValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $DesiredValue
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
 } catch {
     Write-Host "$CisNumber - Fail"
 }
 ############################################################################
-
+#WRONG
+#WRONG
+#WRONG
+#WRONG
+#WRONG
+#WRONG
 # CIS Control Reference
 $CisNumber = "2.3.10.1"
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
 $RegistryName = "TurnOffAnonymousBlock"
-$DesiredValue = 1  # 1 = Disabled (Secure), 0 = Enabled (Insecure)
+$RegistryValue = 1  # 1 = Disabled (Secure), 0 = Enabled (Insecure)
 
-try {
-    Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $DesiredValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $DesiredValue
-} catch {
-    Write-Host "$CisNumber - Fail"
-}
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
 
 
 
