@@ -472,8 +472,190 @@ if ($CurrentValue -eq $DesiredValue) {
 }
 
 
+# 2.3.9.3
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
+$RegistryName = "EnableSecuritySignature" # Corrected registry name
+$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$CisNumber = "2.3.9.3"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
+
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CisNumber - success" -ForegroundColor Green
+} else {
+    Write-Host "$CisNumber - fail" -ForegroundColor Red
+}
+
+
+# 2.3.9.4
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
+$RegistryName = "EnableForcedLogoff"  # Correct registry name
+$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$CisNumber = "2.3.9.4"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
+
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CisNumber - success" -ForegroundColor Green
+} else {
+    Write-Host "$CisNumber - fail" -ForegroundColor Red
+}
+
+
+# 2.3.9.5
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
+$RegistryName = "SmbServerNameHardeningLevel"  # Correct registry name
+$DesiredValue = 1  # 1 = Accept if provided by client, 2 = Required from client, 0 = Off
+$CisNumber = "2.3.9.5"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
+
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CisNumber - success" -ForegroundColor Green
+} else {
+    Write-Host "$CisNumber - fail" -ForegroundColor Red
+}
+
+############################################################################
+# CIS Control: 2.3.9.4 - Ensure 'EnableForcedLogoff' is set to 'Enabled'
+# This setting forces user sessions to be logged off when their time expires.
+
+# Define parameters
+$CisNumber = "2.3.9.4"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
+$RegistryName = "EnableForcedLogoff"
+$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+
+# Function to check and create registry path if missing
+function Ensure-RegistryPath {
+    param (
+        [string]$Path
+    )
+    if (-not (Test-Path $Path)) {
+        Write-Host "$CisNumber - Registry path not found: $Path. Creating it..." -ForegroundColor Yellow
+        try {
+            New-Item -Path $Path -Force | Out-Null
+        } catch {
+            Write-Host "$CisNumber - Failed to create registry path. Error: $_" -ForegroundColor Red
+            exit 1
+        }
+    }
+}
+
+# Function to set registry value
+function Set-RegistryValue {
+    param (
+        [string]$Path,
+        [string]$Name,
+        [int]$Value
+    )
+    try {
+        Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
+    } catch {
+        Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+        exit 1
+    }
+}
+
+# Function to verify registry value
+function Verify-RegistryValue {
+    param (
+        [string]$Path,
+        [string]$Name,
+        [int]$ExpectedValue
+    )
+    $CurrentValue = Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $Name
+
+    if ($CurrentValue -eq $ExpectedValue) {
+        Write-Host "$CisNumber - Success: '$Name' is set to $ExpectedValue." -ForegroundColor Green
+    } else {
+        Write-Host "$CisNumber - Fail: Expected $ExpectedValue but found $CurrentValue." -ForegroundColor Red
+    }
+}
+
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $DesiredValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $DesiredValue
+} catch {
+    Write-Host "$CisNumber - Fail"
+}
+############################################################################
+
+# CIS Control Reference
+$CisNumber = "2.3.10.1"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+$RegistryName = "TurnOffAnonymousBlock"
+$DesiredValue = 1  # 1 = Disabled (Secure), 0 = Enabled (Insecure)
+
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $DesiredValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $DesiredValue
+} catch {
+    Write-Host "$CisNumber - Fail"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 Write-Host "✅ Script execution completed. Restart may be required."
+Read-Host -Prompt "Press Enter to exit"
+
+
