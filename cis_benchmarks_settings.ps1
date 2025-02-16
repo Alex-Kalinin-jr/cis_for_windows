@@ -446,4 +446,34 @@ if ($CurrentValue -eq $DesiredValue) {
 }
 
 
+# 2.3.9.2
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
+$RegistryName = "RequireSecuritySignature"
+$DesiredValue = 1  # 1 = Enabled, 0 = Disabled
+$CisNumber = "2.3.9.2"
+
+if (-not (Test-Path $RegistryPath)) {
+    Write-Host "Registry path does not exist: $RegistryPath. Creating it..." -ForegroundColor Yellow
+    New-Item -Path $RegistryPath -Force | Out-Null
+}
+
+try {
+    Set-ItemProperty -Path $RegistryPath -Name $RegistryName -Value $DesiredValue -Force
+} catch {
+    Write-Host "$CisNumber - Failed to set the registry value. Error: $_" -ForegroundColor Red
+}
+
+$CurrentValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $RegistryName
+
+if ($CurrentValue -eq $DesiredValue) {
+    Write-Host "$CisNumber - success" -ForegroundColor Green
+} else {
+    Write-Host "$CisNumber - fail" -ForegroundColor Red
+}
+
+
+
+
+
+
 Write-Host "✅ Script execution completed. Restart may be required."
