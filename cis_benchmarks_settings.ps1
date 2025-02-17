@@ -29,18 +29,12 @@ function Set-RegistryValue {
         [Parameter(Mandatory)]
         [string]$Name,
         [Parameter(Mandatory)]
-        [int]$Value,
-        [switch]$AsDWord  # Parameter to explicitly set DWORD type
+        [int]$Value
     )
 
     try {
-        if ($AsDWord) {
-            Set-ItemProperty -Path $Path -Name $Name -Value $Value -Type DWord -Force
-            Write-Host "Registry value '$Name' set to '$Value' (DWORD) at path '$Path'" -ForegroundColor Green
-        } else {
-            Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
-            Write-Host "Registry value '$Name' set to '$Value' at path '$Path'" -ForegroundColor Green
-        }
+        Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
+        Write-Host "Registry value '$Name' set to '$Value' at path '$Path'" -ForegroundColor Green
     } catch {
         Write-Error "Failed to set registry value '$Name' at path '$Path'. Error: $_"
     }
@@ -54,6 +48,7 @@ function Verify-RegistryValue {
         [string]$Name,
         [int]$ExpectedValue
     )
+
     $CurrentValue = Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $Name
 
     if ($CurrentValue -eq $ExpectedValue) {
@@ -423,7 +418,7 @@ function Verify-RegistryValue {
 
 
 # $CisNumber = "2.3.9.5"
-# $RegistryPath = "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters"
 # $RegistryName = "SmbServerNameHardeningLevel"
 # $RegistryValue = 1  # 0 = Disabled, 1 = accept if allowed by client, 2 - required from client
 # try {
@@ -435,10 +430,23 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "2.3.10.1"
-$RegistryPath = "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa"
-$RegistryName = "TurnOffAnonymousBlock"
-$RegistryValue = 0  # 0 = Disabled, 1 = enabled
+# $CisNumber = "2.3.10.1"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "TurnOffAnonymousBlock"
+# $RegistryValue = 1  # 0 = Disabled, 1 = enabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "2.3.10.2"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+$RegistryName = "RestrictAnonimousSAM"
+$RegistryValue = 1  # 0 = Disabled, 1 = enabled
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
@@ -448,7 +456,7 @@ try {
 }
 
 
-Write-Host "✅ Script execution completed. Restart may be required."
+Write-Host "Script execution completed. Restart may be required."
 Read-Host -Prompt "Press Enter to exit"
 
 
