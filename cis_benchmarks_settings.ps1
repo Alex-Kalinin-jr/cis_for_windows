@@ -28,13 +28,19 @@ function Set-RegistryValue {
         [string]$Path,
         [Parameter(Mandatory)]
         [string]$Name,
-        [Parameter(Mandatory)]
-        [int]$Value
+        [Parameter()]
+        [object]$Value
     )
 
+
+
     try {
-        Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
-        Write-Host "Registry value '$Name' set to '$Value' at path '$Path'" -ForegroundColor Green
+        if ($Null -eq $Value) {
+            Remove-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
+        } else {
+            Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
+            Write-Host "Registry value '$Name' set to '$Value' at path '$Path'" -ForegroundColor Green
+        }
     } catch {
         Write-Error "Failed to set registry value '$Name' at path '$Path'. Error: $_"
     }
@@ -46,7 +52,8 @@ function Verify-RegistryValue {
     param (
         [string]$Path,
         [string]$Name,
-        [int]$ExpectedValue
+        [Parameter()]
+        [object]$ExpectedValue
     )
 
     $CurrentValue = Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $Name
@@ -443,10 +450,62 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "2.3.10.2"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
-$RegistryName = "RestrictAnonimousSAM"
-$RegistryValue = 1  # 0 = Disabled, 1 = enabled
+# $CisNumber = "2.3.10.2"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "RestrictAnonymousSAM"
+# $RegistryValue = 1  # 0 = Disabled, 1 = enabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.10.3"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "RestrictAnonymous"
+# $RegistryValue = 1  # 0 = Disabled, 1 = enabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.10.4"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "DisableDomainCreds"
+# $RegistryValue = 1  # 0 = Disabled, 1 = enabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.10.5"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "EveryoneIncludesAnonymous"
+# $RegistryValue = 0  # 0 = Disabled, 1 = enabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "2.3.10.6"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
+$RegistryName = "NullSessionPipes"
+$RegistryValue = $Null
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
@@ -457,6 +516,6 @@ try {
 
 
 Write-Host "Script execution completed. Restart may be required."
-Read-Host -Prompt "Press Enter to exit"
+# Read-Host -Prompt "Press Enter to exit"
 
 
