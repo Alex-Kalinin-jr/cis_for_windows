@@ -36,7 +36,7 @@ function Set-RegistryValue {
 
     try {
         if ($Null -eq $Value) {
-            Remove-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
+            # Remove-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
         } else {
             Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
             Write-Host "Registry value '$Name' set to '$Value' at path '$Path'" -ForegroundColor Green
@@ -502,10 +502,101 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "2.3.10.6"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
-$RegistryName = "NullSessionPipes"
-$RegistryValue = $Null
+# $CisNumber = "2.3.10.6"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
+# $RegistryName = "NullSessionPipes"
+# $RegistryValue = $Null
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+# to be refactored
+# $CisNumber = "2.3.10.7"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedExactPaths"
+# $RegistryName = "Machine"
+# $RegistryValue = "System\CurrentControlSet\Control\ProductOptions System\CurrentControlSet\Control\Server Applications/n/rSOFTWARE\Microsoft\Windows NT\CurrentVersion"
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.10.9"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
+# $RegistryName = "RestrictNullSessAccess"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.10.10"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "restrictremotesam"
+# $RegistryValue = "O:SYG:SYD:(A;;RC;;;BA)"
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.10.12"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "ForceGuest"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.11.1"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "UseMachineId"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.11.2"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0"
+# $RegistryName = "AllowNullSessionFallback"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "2.3.11.3"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\pku2u"
+$RegistryName = "AllowOnlineID"
+$RegistryValue = 0
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
@@ -513,6 +604,8 @@ try {
 } catch {
     Write-Host "$CisNumber - Fail"
 }
+
+
 
 
 Write-Host "Script execution completed. Restart may be required."
