@@ -3,6 +3,17 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 
+function Get-LocalUsersWithGroups {
+    Get-LocalUser | ForEach-Object {
+        $user = $_.Name
+        $groups = Get-LocalGroup | Where-Object { (Get-LocalGroupMember $_.Name).Name -match $user }
+        [PSCustomObject]@{
+            UserName = $user
+            Groups = ($groups.Name -join ', ')
+        }
+    }
+}
+
 
 # Function to check and create registry path if missing
 function Ensure-RegistryPath {
@@ -736,9 +747,72 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "2.3.17.2"
+# $CisNumber = "2.3.17.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+# $RegistryName = "ConsentPromptBehaviorAdmin"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+# $CisNumber = "2.3.17.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+# $RegistryName = "ConsentPromptBehaviorUser"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+# $CisNumber = "2.3.17.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+# $RegistryName = "EnableInstallerDetection"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.17.5"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+# $RegistryName = "EnableSecureUIAPaths"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.17.6"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+# $RegistryName = "EnableLUA"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "2.3.17.7"
 $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
-$RegistryName = "ConsentPromptBehaviorAdmin"
+$RegistryName = "PromptOnSecureDesktop"
 $RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
@@ -747,7 +821,6 @@ try {
 } catch {
     Write-Host "$CisNumber - Fail"
 }
-
 
 
 
