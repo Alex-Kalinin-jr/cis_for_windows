@@ -593,10 +593,62 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "2.3.11.3"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\pku2u"
-$RegistryName = "AllowOnlineID"
-$RegistryValue = 0
+# $CisNumber = "2.3.11.3"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\pku2u"
+# $RegistryName = "AllowOnlineID"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.11.5"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "NoLMHash"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.11.6"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters"
+# $RegistryName = "EnableForcedLogoff"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.11.7"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+# $RegistryName = "LmCompatibilityLevel"
+# $RegistryValue = 5
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "2.3.11.8"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LDAP"
+$RegistryName = "LDAPClientIntegrity"
+$RegistryValue = 1 # - 1 negotiate signing, 2 - require signing
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
