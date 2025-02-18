@@ -710,9 +710,35 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "2.3.15.2"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager"
-$RegistryName = "ProtectionMode"
+# $CisNumber = "2.3.15.2"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager"
+# $RegistryName = "ProtectionMode"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.17.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+# $RegistryName = "FilterAdministratorToken"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "2.3.17.2"
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+$RegistryName = "ConsentPromptBehaviorAdmin"
 $RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
