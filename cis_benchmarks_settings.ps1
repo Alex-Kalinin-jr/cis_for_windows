@@ -645,10 +645,75 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "2.3.11.8"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LDAP"
-$RegistryName = "LDAPClientIntegrity"
-$RegistryValue = 1 # - 1 negotiate signing, 2 - require signing
+# $CisNumber = "2.3.11.8"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LDAP"
+# $RegistryName = "LDAPClientIntegrity"
+# $RegistryValue = 1 # - 1 negotiate signing, 2 - require signing
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.11.9"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0"
+# $RegistryName = "NTLMMinClientSec"
+# $RegistryValue = "0x20080000"
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.11.10"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0"
+# $RegistryName = "NTLMMinServerSec"
+# $RegistryValue = "0x20080000"
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.14.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Cryptography"
+# $RegistryName = "ForceKeyProtection"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "2.3.15.1"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel"
+# $RegistryName = "ObCaseInsensitive"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "2.3.15.2"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager"
+$RegistryName = "ProtectionMode"
+$RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
