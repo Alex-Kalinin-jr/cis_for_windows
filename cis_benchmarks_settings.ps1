@@ -1089,47 +1089,229 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "5.21"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\SessionEnv"
-$RegistryName = "Start"
-$RegistryValue = 0
-try {
-    Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
-} catch {
-    Write-Host "$CisNumber - Fail"
-}
+# $CisNumber = "5.21"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\SessionEnv"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
 
 
-$CisNumber = "5.22"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\TermService"
-$RegistryName = "Start"
-$RegistryValue = 0
-try {
-    Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
-} catch {
-    Write-Host "$CisNumber - Fail"
-}
+# $CisNumber = "5.22"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\TermService"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
 
 
-$CisNumber = "5.23"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\UmRdpService"
-$RegistryName = "Start"
-$RegistryValue = 0
-try {
-    Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
-} catch {
-    Write-Host "$CisNumber - Fail"
-}
+# $CisNumber = "5.23"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\UmRdpService"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
 
 
-$CisNumber = "5.24"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\RpcLocator"
+# $CisNumber = "5.24"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\RpcLocator"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.25"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\RemoteRegistry"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.26"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\RemoteAccess"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.27"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.27"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.28"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\simptcp"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.29"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\SNMP"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.30"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\sacsvr"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.31"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\SSDPSRV"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.32"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\upnphost"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.33"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\WMSvc"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.34"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\WerSvc"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.35"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Wecsvc"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.36"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "5.37"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\icssvc"
 $RegistryName = "Start"
 $RegistryValue = 0
 try {
