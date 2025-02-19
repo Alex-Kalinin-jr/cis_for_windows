@@ -944,8 +944,86 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "5.9"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\lltdsvc"
+# $CisNumber = "5.9"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\lltdsvc"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.10"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LxssManager"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.11"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\FTPSVC"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.12"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\MSiSCSI"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.14"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\PNRPsvc"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.15"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\p2psvc"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "5.16"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\p2pimsvc"
 $RegistryName = "Start"
 $RegistryValue = 0
 try {
