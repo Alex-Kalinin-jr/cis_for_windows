@@ -43,8 +43,6 @@ function Set-RegistryValue {
         [object]$Value
     )
 
-
-
     try {
         if ($Null -eq $Value) {
             # Remove-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
@@ -1022,8 +1020,77 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "5.16"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\p2pimsvc"
+# $CisNumber = "5.16"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\p2pimsvc"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.17"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\PNRPAutoReg"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "5.18"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Spooler"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint"
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     $RegistryName = "NoWarningNoElevationOnInstall"
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    
+#     $RegistryName = "UpdatePromptSettings"
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+# Stop-Service -Name Spooler -Force
+# Set-Service -Name Spooler -StartupType Disabled
+
+
+# $CisNumber = "5.19"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\wercplsupport"
+# $RegistryName = "Start"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "5.21"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\SessionEnv"
 $RegistryName = "Start"
 $RegistryValue = 0
 try {
@@ -1035,8 +1102,44 @@ try {
 }
 
 
+$CisNumber = "5.22"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\TermService"
+$RegistryName = "Start"
+$RegistryValue = 0
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+} catch {
+    Write-Host "$CisNumber - Fail"
+}
+
+
+$CisNumber = "5.23"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\UmRdpService"
+$RegistryName = "Start"
+$RegistryValue = 0
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+} catch {
+    Write-Host "$CisNumber - Fail"
+}
+
+
+$CisNumber = "5.24"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\RpcLocator"
+$RegistryName = "Start"
+$RegistryValue = 0
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+} catch {
+    Write-Host "$CisNumber - Fail"
+}
+
 
 Write-Host "Script execution completed. Restart may be required."
 # Read-Host -Prompt "Press Enter to exit"
-
-
