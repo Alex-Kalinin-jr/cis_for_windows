@@ -1439,10 +1439,36 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "9.2.2"
+# $CisNumber = "9.2.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile"
+# $RegistryName = "DefaultInboundAction"
+# $RegistryValue = 1 # 1 - block, 2 - allow
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "9.2.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile"
+# $RegistryName = "DefaultOutboundAction"
+# $RegistryValue = 0 # 1 - block, 2 - allow
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "9.2.4"
 $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile"
-$RegistryName = "DefaultInboundAction"
-$RegistryValue = 1 # TO BE PERFORMED AND ADJUSTED
+$RegistryName = "DisableNotifications"
+$RegistryValue = 1 
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
