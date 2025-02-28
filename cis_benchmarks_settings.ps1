@@ -1483,9 +1483,9 @@ function Verify-RegistryValue {
 
 
 # $CisNumber = "9.2.5"
-# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging"
 # $RegistryName = "LogFilePath"
-# $RegistryValue = "E:\logs\firewall.log" 
+# $RegistryValue = "E:\logs\priv_firewall.log" 
 # try {
 #     Ensure-RegistryPath -Path $RegistryPath
 #     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
@@ -1573,18 +1573,106 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "9.3.4"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile"
-$RegistryName = "DisableNotifications"
-$RegistryValue = 0
-try {
-    Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
-} catch {
-    Write-Host "$CisNumber - Fail"
-}
+# $CisNumber = "9.3.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile"
+# $RegistryName = "DisableNotifications"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
 
 
-Write-Host "Script execution completed. Restart may be required."
+# $CisNumber = "9.3.5"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile"
+# $RegistryName = "AllowLocalPolicyMerge"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "9.3.6"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile"
+# $RegistryName = "AllowLocalIPsecPolicyMerge"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+
+# $CisNumber = "9.3.7"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging"
+# $RegistryName = "LogFilePath"
+# $RegistryValue = "E:\logs\pub_firewall.log" 
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+
+# $CisNumber = "9.3.8"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging"
+# $RegistryName = "LogFileSize"
+# $RegistryValue = 32767 
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "9.3.9"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging"
+# $RegistryName = "LogDroppedPackets"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "9.3.10"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging"
+# $RegistryName = "LogSuccessfulConnections"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "17.1.1"
+$SubCategory = "Проверка учетных данных"
+Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+Write-Host "'$SubCAtegory' was configured"
+
+
+# Write-Host "Script execution completed. Restart may be required."
+# gpupdate
 # Read-Host -Prompt "Press Enter to exit"
