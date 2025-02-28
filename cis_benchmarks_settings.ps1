@@ -1666,11 +1666,35 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "17.1.1"
-$SubCategory = "Проверка учетных данных"
+# $CisNumber = "17.1.1"
+# $SubCategory = "Проверка учетных данных"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured"
+
+
+# $CisNumber = "17.2.1"
+# $SubCategory = "Управление группой приложений"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured"
+
+
+# $CisNumber = "17.2.2"
+# $SubCategory = "Управление группой безопасности"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable
+# Write-Host "'$SubCAtegory' was configured"
+
+
+$CisNumber = "17.2.3"
+$SubCategory = "Управление учетными записями"
 Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
 auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
 Write-Host "'$SubCAtegory' was configured"
+
+
+
 
 
 # Write-Host "Script execution completed. Restart may be required."
