@@ -1722,8 +1722,29 @@ function Verify-RegistryValue {
 # Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
 
 
-$CisNumber = "17.5.3"
-$SubCategory = "Выход из системы"
+# $CisNumber = "17.5.3"
+# $SubCategory = "Выход из системы"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable
+# Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
+
+
+# $CisNumber = "17.5.4"
+# $SubCategory = "Вход в систему"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
+
+
+# $CisNumber = "17.5.5"
+# $SubCategory = "Другие события входа и выхода"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
+
+
+$CisNumber = "17.5.6"
+$SubCategory = "Специальный вход"
 Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
 auditpol /set /subcategory:$SubCategory /success:enable
 Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
