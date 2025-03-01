@@ -1,5 +1,6 @@
 #9.3.5 is not understood. was not performed. to be investigated.
-
+#17.3.1 is not implemented. audit policy is not found via "auditpol"
+#17.6.2 is not implemented. audit policy is not found via "auditpol"
 
 
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -1694,11 +1695,7 @@ function Verify-RegistryValue {
 # Write-Host "'$SubCAtegory' was configured"
 
 
-# $CisNumber = "17.3.1"
-# $SubCategory = "Съемные носители"
-# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
-# auditpol /set /subcategory:$SubCategory /success:enable
-# Write-Host "'$SubCAtegory' was configured"
+# $CisNumber = "17.3.1" - to be performed
 
 
 # $CisNumber = "17.3.2"
@@ -1743,12 +1740,32 @@ function Verify-RegistryValue {
 # Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
 
 
-$CisNumber = "17.5.6"
-$SubCategory = "Специальный вход"
-Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
-auditpol /set /subcategory:$SubCategory /success:enable
-Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
+# $CisNumber = "17.5.6"
+# $SubCategory = "Специальный вход"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable
+# Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
 
+
+# $CisNumber = "17.6.1"
+# $SubCategory = "Сведения об общем файловом ресурсе"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
+
+
+# $CisNumber = "17.6.3"
+# $SubCategory = "Другие события доступа к объекту"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "$CisNumber benchmark: '$SubCAtegory' was configured" -ForegroundColor Green
+
+
+# $CisNumber = "17.6.4"
+# $SubCategory = "Съемные носители"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable
+# Write-Host "'$SubCAtegory' was configured"
 
 
 
