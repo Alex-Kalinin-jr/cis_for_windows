@@ -1,6 +1,7 @@
 #9.3.5 is not understood. was not performed. to be investigated.
 #17.3.1 is not implemented. audit policy is not found via "auditpol"
 #17.6.2 is not implemented. audit policy is not found via "auditpol"
+#17.8.1 is not implemented. subcategory is parsed in wrong way
 
 
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -1768,6 +1769,105 @@ function Verify-RegistryValue {
 # Write-Host "'$SubCAtegory' was configured"
 
 
+# $CisNumber = "17.7.1"
+# $SubCategory = "Аудит изменения политики"
+# Write-Host "Configuring Audit Credential Validation..." -ForegroundColor Cyan
+# auditpol /set /subcategory:$SubCategory /success:enable
+# Write-Host "'$SubCAtegory' was configured"
+
+
+# $CisNumber = "17.7.2"
+# $SubCategory = "Изменение политики авторизации"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+
+# $CisNumber = "17.7.3"
+# $SubCategory = "Изменение политики проверки подлинности"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+# $CisNumber = "17.7.4"
+# $SubCategory = "Изменение политики правила уровня MPSSVC"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+# $CisNumber = "17.7.5"
+# $SubCategory = "Другие события изменения политики"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+
+# $CisNumber = "17.9.1"
+# $SubCategory = "Драйвер IPSEC"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+
+# $CisNumber = "17.9.2"
+# $SubCategory = "Другие системные события"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+
+# $CisNumber = "17.9.3"
+# $SubCategory = "Изменение состояния безопасности"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+# $CisNumber = "17.9.4"
+# $SubCategory = "Расширение системы безопасности"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+# $CisNumber = "17.9.4"
+
+
+# $CisNumber = "17.9.5"
+# $SubCategory = "Целостность системы"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+
+# $CisNumber = "17.9.5"
+# $SubCategory = "Целостность системы"
+# Write-Host "Configuring Audit Credential Validation..." 
+# auditpol /set /subcategory:$SubCategory /success:enable /failure:enable
+# Write-Host "'$SubCAtegory' was configured" -ForegroundColor Cyan
+
+
+# $CisNumber = "18.1.1.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization"
+# $RegistryName = "NoLockScreenCamera"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.1.1.2"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization"
+$RegistryName = "NoLockScreenSlideshow"
+$RegistryValue = 1
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+} catch {
+    Write-Host "$CisNumber - Fail"
+}
 
 
 # Write-Host "Script execution completed. Restart may be required."
