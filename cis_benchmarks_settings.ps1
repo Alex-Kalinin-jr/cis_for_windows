@@ -1981,17 +1981,237 @@ function Verify-RegistryValue {
 #     Write-Host "$CisNumber - Fail"
 # }
 
-$CisNumber = "18.4.2"
-$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters"
-$RegistryName = "DisableIPSourceRouting"
-$RegistryValue = 2
-try {
-    Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
-} catch {
-    Write-Host "$CisNumber - Fail"
-}
+# $CisNumber = "18.4.2"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters"
+# $RegistryName = "DisableIPSourceRouting"
+# $RegistryValue = 2
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.3"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"
+# $RegistryName = "DisableIPSourceRouting"
+# $RegistryValue = 2
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.4"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\RasMan\Parameters"
+# $RegistryName = "DisableSavePassword"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+# $CisNumber = "18.4.5"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"
+# $RegistryName = "EnableICMPRedirect"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.6"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"
+# $RegistryName = "KeepAliveTime"
+# $RegistryValue = 300000
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.7"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters"
+# $RegistryName = "NoNameReleaseOnDemand"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.8"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"
+# $RegistryName = "PerformRouterDiscovery"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.9"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager"
+# $RegistryName = "SafeDllSearchMode"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.10"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+# $RegistryName = "ScreenSaverGracePeriod"
+# $RegistryValue = 5
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.11"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\TCPIP6\Parameters"
+# $RegistryName = "TcpMaxDataRetransmissions"
+# $RegistryValue = 3
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.11"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\TCPIP6\Parameters"
+# $RegistryName = "TcpMaxDataRetransmissions"
+# $RegistryValue = 3
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.12"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"
+# $RegistryName = "TcpMaxDataRetransmissions"
+# $RegistryValue = 3
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.12"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"
+# $RegistryName = "TcpMaxDataRetransmissions"
+# $RegistryValue = 3
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.4.13"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Eventlog\Security"
+# $RegistryName = "WarningLevel"
+# $RegistryValue = 90
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.4.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient"
+# $RegistryName = "DoHPolicy"
+# $RegistryValue = 2
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.4.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient"
+# $RegistryName = "EnableMulticast"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.5.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName = "EnableFontProviders"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.8.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation"
+# $RegistryName = "AllowInsecureGuestAuth"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
 
 
 # Write-Host "Script execution completed. Restart may be required."
