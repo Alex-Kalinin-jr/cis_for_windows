@@ -54,7 +54,6 @@ function Set-RegistryValue {
             # Remove-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
         } else {
             Set-ItemProperty -Path $Path -Name $Name -Value $Value -Force
-            Write-Host "Registry value '$Name' set to '$Value' at path '$Path'" -ForegroundColor Green
         }
     } catch {
         Write-Error "Failed to set registry value '$Name' at path '$Path'. Error: $_"
@@ -74,7 +73,7 @@ function Verify-RegistryValue {
     $CurrentValue = Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue | Select-Object -ExpandProperty $Name
 
     if ($CurrentValue -eq $ExpectedValue) {
-        Write-Host "$CisNumber - Success" -ForegroundColor Green
+        Write-Host "$CisNumber --- $Path --- $Name is set to $ExpectedValue" -ForegroundColor Green
     } else {
         Write-Host "$CisNumber - Fail" -ForegroundColor Red
     }
@@ -2212,6 +2211,158 @@ function Verify-RegistryValue {
 # } catch {
 #     Write-Host "$CisNumber - Fail"
 # }
+
+
+# $CisNumber = "18.5.9.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD"
+# $RegistryName = "AllowLLTDIOOnDomain"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+# $RegistryName = "AllowLLTDIOOnPublicNet"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+# $RegistryName = "EnableLLTDIO"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+# $RegistryName = "ProhibitLLTDIOOnPrivateNet"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.9.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LLTD"
+# $RegistryName = "AllowRspndrOnDomain"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+# $RegistryName = "AllowRspndrOnPublicNet"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+# $RegistryName = "EnableRspndr"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+# $RegistryName = "ProhibitRspndrOnPrivateNet"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.10.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Peernet"
+# $RegistryName = "Disabled"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.10.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Peernet"
+# $RegistryName = "Disabled"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.11.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections"
+# $RegistryName = "NC_AllowNetBridge_NLA"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.11.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Network Connections"
+# $RegistryName = "NC_ShowSharedAccessUI"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.5.14.1"
+$registryPath = "HKLM:\Software\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths"
+Ensure-RegistryPath -Path $RegistryPath
+
+$hardenedPaths = @{
+    "\\*\NETLOGON" = "RequireMutualAuthentication=1,RequireIntegrity=1"
+    "\\*\SYSVOL" = "RequireMutualAuthentication=1,RequireIntegrity=1"
+    "\\SERVER" = "RequireMutualAuthentication=1,RequireIntegrity=1,RequirePrivacy=1"
+}
+
+foreach ($path in $hardenedPaths.Keys) {
+    $valueName = $path
+    $valueData = $hardenedPaths[$path]
+    Set-ItemProperty -Path $registryPath -Name $valueName -Value $valueData -Type String
+    Write-Output "Hardened UNC Path configured: $valueName -> $valueData"
+}
+
+
 
 
 # Write-Host "Script execution completed. Restart may be required."
