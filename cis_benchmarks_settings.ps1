@@ -2,7 +2,7 @@
 #17.3.1 is not implemented. audit policy is not found via "auditpol"
 #17.6.2 is not implemented. audit policy is not found via "auditpol"
 #17.8.1 is not implemented. subcategory is parsed in wrong way
-
+#18.5.20.1 is not implemented FOR CONVENIENCE!!!.
 
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Host "Please run this script as Administrator." -ForegroundColor Red
@@ -2345,25 +2345,92 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.5.14.1"
-$registryPath = "HKLM:\Software\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths"
-Ensure-RegistryPath -Path $RegistryPath
+# $CisNumber = "18.5.14.1"
+# $registryPath = "HKLM:\Software\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths"
+# Ensure-RegistryPath -Path $RegistryPath
 
-$hardenedPaths = @{
-    "\\*\NETLOGON" = "RequireMutualAuthentication=1,RequireIntegrity=1"
-    "\\*\SYSVOL" = "RequireMutualAuthentication=1,RequireIntegrity=1"
-    "\\SERVER" = "RequireMutualAuthentication=1,RequireIntegrity=1,RequirePrivacy=1"
+# $hardenedPaths = @{
+#     "\\*\NETLOGON" = "RequireMutualAuthentication=1,RequireIntegrity=1"
+#     "\\*\SYSVOL" = "RequireMutualAuthentication=1,RequireIntegrity=1"
+#     "\\SERVER" = "RequireMutualAuthentication=1,RequireIntegrity=1,RequirePrivacy=1"
+# }
+
+# foreach ($path in $hardenedPaths.Keys) {
+#     $valueName = $path
+#     $valueData = $hardenedPaths[$path]
+#     Set-ItemProperty -Path $registryPath -Name $valueName -Value $valueData -Type String
+#     Write-Output "Hardened UNC Path configured: $valueName -> $valueData"
+# }
+
+
+# $CisNumber = "18.5.19.2.1"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\TCPIP6\Parameters"
+# $RegistryName = "DisabledComponents"
+# $RegistryValue = 255
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.20.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars"
+# $RegistryChanges = @{
+#     "EnableRegistrars" = 0
+#     "DisableUPnPRegistrar" = 1
+#     "DisableInBand802DOT11Registrar" = 1
+#     "DisableFlashConfigRegistrar" = 1
+#     "DisableWPDRegistrar" = 1
+# }
+
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     foreach ($RegistryName in $RegistryChanges.Keys) {
+#         $RegistryValue = $RegistryChanges[$RegistryName]
+#         Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#         Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+#     }
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.20.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars"
+# $RegistryChanges = @{
+#     "EnableRegistrars" = 0
+#     "DisableUPnPRegistrar" = 1
+#     "DisableInBand802DOT11Registrar" = 1
+#     "DisableFlashConfigRegistrar" = 1
+#     "DisableWPDRegistrar" = 1
+# }
+
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     foreach ($RegistryName in $RegistryChanges.Keys) {
+#         $RegistryValue = $RegistryChanges[$RegistryName]
+#         Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#         Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+#     }
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.5.20.2"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\UI"
+$RegistryName = "DisableWcnUi"
+$RegistryValue = 1
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+} catch {
+    Write-Host "$CisNumber - Fail"
 }
-
-foreach ($path in $hardenedPaths.Keys) {
-    $valueName = $path
-    $valueData = $hardenedPaths[$path]
-    Set-ItemProperty -Path $registryPath -Name $valueName -Value $valueData -Type String
-    Write-Output "Hardened UNC Path configured: $valueName -> $valueData"
-}
-
-
-
 
 # Write-Host "Script execution completed. Restart may be required."
 # gpupdate
