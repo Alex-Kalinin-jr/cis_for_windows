@@ -2420,9 +2420,87 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.5.20.2"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\UI"
-$RegistryName = "DisableWcnUi"
+# $CisNumber = "18.5.20.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WCN\UI"
+# $RegistryName = "DisableWcnUi"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.21.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy"
+# $RegistryName = "fMinimizeConnections"
+# $RegistryValue = 3
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.5.23.2.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config"
+# $RegistryName = "AutoConnectAllowedOEM"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.6.1"
+# $RegistryPath = "HKLM:\Software\Policies\Microsoft\Windows NT\Printers"
+# $RegistryName = "NoWarningNoElevationOnInstall"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.6.3"
+# $RegistryPath = "HKLM:\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint"
+# $RegistryName = "UpdatePromptSettings"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.7.1.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications"
+# $RegistryName = "NoCloudApplicationNotification"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.8.3.1"
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit"
+$RegistryName = "ProcessCreationIncludeCmdLine_Enabled"
 $RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
