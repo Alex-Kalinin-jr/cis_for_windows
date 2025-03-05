@@ -2657,21 +2657,47 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.8.7.1.5"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceIDs"
-$deviceClassGUIDs = @(
-    "{d48179be-ec20-11d1-b6b8-00c04fa372a7}", # IEEE 1394 SBP2 Protocol Class
-    "{7ebefbc0-3200-11d2-b4c2-00a0C9697d07}", # IEEE 1394 IEC-61883 Protocol Class
-    "{c06ff265-ae09-48f0-812c-16753d7cba83}", # IEEE 1394 AVC Protocol Class
-    "{6bdd1fc1-810f-11d0-bec7-08002be2092f}"  # IEEE 1394 Host Bus Controller Class
-)
+# $CisNumber = "18.8.7.1.5"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceIDs"
+# $deviceClassGUIDs = @(
+#     "{d48179be-ec20-11d1-b6b8-00c04fa372a7}", # IEEE 1394 SBP2 Protocol Class
+#     "{7ebefbc0-3200-11d2-b4c2-00a0C9697d07}", # IEEE 1394 IEC-61883 Protocol Class
+#     "{c06ff265-ae09-48f0-812c-16753d7cba83}", # IEEE 1394 AVC Protocol Class
+#     "{6bdd1fc1-810f-11d0-bec7-08002be2092f}"  # IEEE 1394 Host Bus Controller Class
+# )
 
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     for ($i = 1; $i -le $deviceClassGUIDs.Count; $i++) {
+#         Set-RegistryValue -Path $RegistryPath -Name $i -Value $deviceClassGUIDs[$i - 1]
+#         Verify-RegistryValue -Path $RegistryPath -Name $i -ExpectedValue $deviceClassGUIDs[$i - 1]
+#     }
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.7.1.6"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions"
+# $RegistryName = "DenyDeviceClassesRetroactive"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.8.7.2"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata"
+$RegistryName = "PreventDeviceMetadataFromNetwork"
+$RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
-    for ($i = 1; $i -le $deviceClassGUIDs.Count; $i++) {
-        Set-RegistryValue -Path $RegistryPath -Name $i -Value $deviceClassGUIDs[$i - 1]
-        Verify-RegistryValue -Path $RegistryPath -Name $i -ExpectedValue $deviceClassGUIDs[$i - 1]
-    }
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
 } catch {
     Write-Host "$CisNumber - Fail"
 }
