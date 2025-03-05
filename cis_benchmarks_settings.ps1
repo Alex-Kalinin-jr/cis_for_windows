@@ -2498,14 +2498,180 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.8.3.1"
-$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit"
-$RegistryName = "ProcessCreationIncludeCmdLine_Enabled"
-$RegistryValue = 1
+# $CisNumber = "18.8.3.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit"
+# $RegistryName = "ProcessCreationIncludeCmdLine_Enabled"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+# today
+# today
+# today
+# today
+# $CisNumber = "18.8.4.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters"
+# $RegistryName = "AllowEncryptionOracle"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.4.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation"
+# $RegistryName = "AllowProtectedCreds"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.5.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard"
+# $RegistryName = "EnableVirtualizationBasedSecurity"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.5.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard"
+# $RegistryName = "RequirePlatformSecurityFeatures"
+# $RegistryValue = 3
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.5.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard"
+# $RegistryName = "HypervisorEnforcedCodeIntegrity"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.5.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard"
+# $RegistryName = "HVCIMATRequired"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.5.5"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard"
+# $RegistryName = "LsaCfgFlags"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.5.6"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard"
+# $RegistryName = "ConfigureSystemGuardLaunch"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.7.1.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceIDs"
+# $RegistryName = "1"
+# $RegistryValue = "PCI\CC_0C0A"
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.7.1.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions"
+# $RegistryName = "DenyDeviceIDsRetroactive"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.7.1.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions"
+# $RegistryName = "DenyDeviceClasses"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.8.7.1.5"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceIDs"
+$deviceClassGUIDs = @(
+    "{d48179be-ec20-11d1-b6b8-00c04fa372a7}", # IEEE 1394 SBP2 Protocol Class
+    "{7ebefbc0-3200-11d2-b4c2-00a0C9697d07}", # IEEE 1394 IEC-61883 Protocol Class
+    "{c06ff265-ae09-48f0-812c-16753d7cba83}", # IEEE 1394 AVC Protocol Class
+    "{6bdd1fc1-810f-11d0-bec7-08002be2092f}"  # IEEE 1394 Host Bus Controller Class
+)
+
 try {
     Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+    for ($i = 1; $i -le $deviceClassGUIDs.Count; $i++) {
+        Set-RegistryValue -Path $RegistryPath -Name $i -Value $deviceClassGUIDs[$i - 1]
+        Verify-RegistryValue -Path $RegistryPath -Name $i -ExpectedValue $deviceClassGUIDs[$i - 1]
+    }
 } catch {
     Write-Host "$CisNumber - Fail"
 }
