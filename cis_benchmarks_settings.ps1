@@ -2752,9 +2752,74 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.8.22.1.3"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC"
-$RegistryName = "PreventHandwritingDataSharing"
+# $CisNumber = "18.8.22.1.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports"
+# $RegistryName = "PreventHandwritingErrorReports"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.5"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Internet Connection Wizard"
+# $RegistryName = "ExitOnMSICW"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.6"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+# $RegistryName = "NoWebServices"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.7"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers"
+# $RegistryName = "DisableHTTPPrinting"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.8"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Registration Wizard Control"
+# $RegistryName = "NoRegistration"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.8.22.1.9"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\SearchCompanion"
+$RegistryName = "DisableContentFileUpdates"
 $RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
