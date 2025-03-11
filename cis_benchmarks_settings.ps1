@@ -2882,19 +2882,145 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.8.22.1.14"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting"
-$RegistryName = "Disabled"
-$RegistryValue = 1
-try {
-    Ensure-RegistryPath -Path $RegistryPath
-    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
-    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
-} catch {
-    Write-Host "$CisNumber - Fail"
-}
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting"
-$RegistryName = "DoReport"
+# $CisNumber = "18.8.22.1.14"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting"
+# $RegistryName = "Disabled"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting"
+# $RegistryName = "DoReport"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.25.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters"
+# $RegistryName = "DevicePKInitEnabled"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+# $RegistryName = "DevicePKInitBehavior"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.26.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Kernel DMA Protection"
+# $RegistryName = "DeviceEnumerationPolicy"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.27.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Control Panel\International"
+# $RegistryName = "BlockUserInputMethodsForSignIn"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.28.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName = "BlockUserFromShowingAccountDetailsOnSignin"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.28.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName = "DontDisplayNetworkSelectionUI"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.28.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName = "DisableLockScreenAppNotifications"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.28.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName = "AllowDomainPINLogon"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.31.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName = "AllowCrossDeviceClipboard"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.8.31.2"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+$RegistryName = "UploadUserActivities"
 $RegistryValue = 0
 try {
     Ensure-RegistryPath -Path $RegistryPath
@@ -2903,6 +3029,7 @@ try {
 } catch {
     Write-Host "$CisNumber - Fail"
 }
+
 
 # Write-Host "Script execution completed. Restart may be required."
 # gpupdate
