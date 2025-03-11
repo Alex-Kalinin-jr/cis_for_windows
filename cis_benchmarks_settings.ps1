@@ -2713,10 +2713,49 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.8.21.2"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
-$RegistryName = "EnableCdp"
-$RegistryValue = 0
+# $CisNumber = "18.8.21.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName = "EnableCdp"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer"
+# $RegistryName = "NoUseStoreOpenWith"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers"
+# $RegistryName = "DisableWebPnPDownload"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.8.22.1.3"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC"
+$RegistryName = "PreventHandwritingDataSharing"
+$RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
