@@ -2510,10 +2510,7 @@ function Verify-RegistryValue {
 #     Write-Host "$CisNumber - Fail"
 # }
 
-# today
-# today
-# today
-# today
+
 # $CisNumber = "18.8.4.1"
 # $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters"
 # $RegistryName = "AllowEncryptionOracle"
@@ -2690,10 +2687,36 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.8.7.2"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata"
-$RegistryName = "PreventDeviceMetadataFromNetwork"
-$RegistryValue = 1
+# $CisNumber = "18.8.7.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata"
+# $RegistryName = "PreventDeviceMetadataFromNetwork"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.14.1"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch"
+# $RegistryName = "DriverLoadPolicy"
+# $RegistryValue = 3
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.8.21.2"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+$RegistryName = "EnableCdp"
+$RegistryValue = 0
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
