@@ -2817,10 +2817,85 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.8.22.1.9"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\SearchCompanion"
-$RegistryName = "DisableContentFileUpdates"
+# $CisNumber = "18.8.22.1.9"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\SearchCompanion"
+# $RegistryName = "DisableContentFileUpdates"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.10"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+# $RegistryName = "NoOnlinePrintsWizard"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.11"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+# $RegistryName = "NoPublishingWizard"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.12"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Messenger\Client"
+# $RegistryName = "CEIP"
+# $RegistryValue = 2
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.8.22.1.13"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows"
+# $RegistryName = "CEIPEnable"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.8.22.1.14"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting"
+$RegistryName = "Disabled"
 $RegistryValue = 1
+try {
+    Ensure-RegistryPath -Path $RegistryPath
+    Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+    Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+} catch {
+    Write-Host "$CisNumber - Fail"
+}
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting"
+$RegistryName = "DoReport"
+$RegistryValue = 0
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
