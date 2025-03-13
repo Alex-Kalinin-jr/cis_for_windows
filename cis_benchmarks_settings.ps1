@@ -3629,10 +3629,101 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.11.2.13"
+# $CisNumber = "18.9.11.2.14"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "EnableBDEWithNoTPM"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVDiscoveryVolumeType"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVRecovery"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVManageDRA"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVRecoveryPassword"
+# $RegistryValue = 2
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.5"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVRecoveryKey"
+# $RegistryValue = 2
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.6"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVHideRecoveryPage"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.9.11.3.7"
 $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
-$RegistryName = "UseAdvancedStartup"
-$RegistryValue = 1
+$RegistryName = "RDVActiveDirectoryBackup"
+$RegistryValue = 0
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
