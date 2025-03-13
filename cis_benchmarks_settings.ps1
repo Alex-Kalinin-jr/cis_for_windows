@@ -3720,10 +3720,179 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.11.3.7"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
-$RegistryName = "RDVActiveDirectoryBackup"
-$RegistryValue = 0
+# $CisNumber = "18.9.11.3.7"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVActiveDirectoryBackup"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.8"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVActiveDirectoryInfoToStore"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.9"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVRequireActiveDirectoryBackup"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.10"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVHardwareEncryption"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.11"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVPassphrase"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.12"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVAllowUserCert"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.13"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVEnforceUserCert"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.14"
+# $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Policies\Microsoft\FVE"
+# $RegistryName = "RDVDenyWriteAccess"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.3.15"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "RDVDenyCrossOrg"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "DisableExternalDMAUnderLock"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.12.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Camera"
+# $RegistryName = "AllowCamera"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.14.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+# $RegistryName = "DisableConsumerAccountStateContent"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.14.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+# $RegistryName = "DisableCloudOptimizedContent"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.9.14.3"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+$RegistryName = "DisableWindowsConsumerFeatures"
+$RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
