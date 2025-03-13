@@ -3889,9 +3889,178 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.14.3"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
-$RegistryName = "DisableWindowsConsumerFeatures"
+# $CisNumber = "18.9.14.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+# $RegistryName = "DisableWindowsConsumerFeatures"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.15.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Connect"
+# $RegistryName = "RequirePinForPairing"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.16.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredUI"
+# $RegistryName = "DisablePasswordReveal"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.16.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI"
+# $RegistryName = "EnumerateAdministrators"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.16.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName = "NoLocalPasswordResetQuestions"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.17.1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+# $RegistryName = "AllowTelemetry"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.17.2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+# $RegistryName = "DisableEnterpriseAuthProxy"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.17.3"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+# $RegistryName = "DisableOneSettingsDownloads"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.17.4"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+# $RegistryName = "DoNotShowFeedbackNotifications"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.17.5"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+# $RegistryName = "EnableOneSettingsAuditing"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.17.6"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+# $RegistryName = "LimitDiagnosticLogCollection"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.17.7"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+# $RegistryName = "LimitDumpCollection"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.17.8"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds"
+# $RegistryName = "AllowBuildPreview"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.9.18.1"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization"
+$RegistryName = "DODownloadMode"
 $RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
