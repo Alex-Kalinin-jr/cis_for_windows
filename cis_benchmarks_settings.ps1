@@ -3551,10 +3551,88 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.11.2.6"
+# $CisNumber = "18.9.11.2.6"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "OSRecoveryKey"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.2.7"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "OSHideRecoveryPage"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.2.8"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "OSActiveDirectoryBackup"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.2.9"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "OSActiveDirectoryInfoToStore"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.2.10"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "OSRequireActiveDirectoryBackup"
+# $RegistryValue = 1
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.11.2.11"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
+# $RegistryName = "OSHardwareEncryption"
+# $RegistryValue = 0
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.9.11.2.13"
 $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\FVE"
-$RegistryName = "OSRecoveryKey"
-$RegistryValue = 0
+$RegistryName = "UseAdvancedStartup"
+$RegistryValue = 1
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
