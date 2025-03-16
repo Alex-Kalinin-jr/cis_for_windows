@@ -4949,10 +4949,62 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.85.2.1 (L1)"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter"
-$RegistryName = "EnabledV9"
-$RegistryValue = 1  # 1 = Enabled (SmartScreen is turned on)
+# $CisNumber = "18.9.85.2.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter"
+# $RegistryName = "EnabledV9"
+# $RegistryValue = 1  # 1 = Enabled (SmartScreen is turned on)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.85.2.2 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter"
+# $RegistryName = "PreventOverride"
+# $RegistryValue = 1  # 1 = Enabled (prevent bypassing SmartScreen prompts)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.87.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR"
+# $RegistryName = "AllowGameDVR"
+# $RegistryValue = 0  # 0 = Disabled (Game Recording and Broadcasting is turned off)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.89.1 (L2)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace"
+# $RegistryName = "AllowSuggestedAppsInWindowsInkWorkspace"
+# $RegistryValue = 0  # 0 = Disabled (suggested apps are not allowed)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.9.89.2 (L1)"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace"
+$RegistryName = "AllowWindowsInkWorkspace"
+$RegistryValue = 1  # 1 = Enabled: On, but disallow access above lock
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
