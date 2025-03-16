@@ -4776,10 +4776,183 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.67.2 (L2)"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
-$RegistryName = "AllowCloudSearch"
-$RegistryValue = 0  # 0 = Disable Cloud Search
+# $CisNumber = "18.9.67.2 (L2)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
+# $RegistryName = "AllowCloudSearch"
+# $RegistryValue = 0  # 0 = Disable Cloud Search
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.67.3 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
+# $RegistryName = "AllowCortana"
+# $RegistryValue = 0  # 0 = Disable Cortana
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.67.4 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
+# $RegistryName = "AllowCortanaAboveLock"
+# $RegistryValue = 0  # 0 = Disable Cortana above lock screen
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.67.5 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
+# $RegistryName = "AllowIndexingEncryptedStoresOrItems"
+# $RegistryValue = 0  # 0 = Disable indexing of encrypted files
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.67.6 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
+# $RegistryName = "AllowSearchToUseLocation"
+# $RegistryValue = 0  # 0 = Disable search and Cortana from using location
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.72.1 (L2)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform"
+# $RegistryName = "NoGenTicket"
+# $RegistryValue = 1  # 1 = Enable 'Turn off KMS Client Online AVS Validation'
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.75.1 (L2)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore"
+# $RegistryName = "DisableStoreApps"
+# $RegistryValue = 0  # 0 = Disabled (Microsoft Store apps are allowed)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.75.2 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore"
+# $RegistryName = "RequirePrivateStoreOnly"
+# $RegistryValue = 1  # 1 = Enabled (Only display the private store within the Microsoft Store)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.75.3 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore"
+# $RegistryName = "AutoDownload"
+# $RegistryValue = 2  # 2 = Disabled (automatic download and install of updates is enabled)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.75.4 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore"
+# $RegistryName = "DisableOSUpgrade"
+# $RegistryValue = 1  # 1 = Enabled (turn off the offer to update to the latest version of Windows)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.75.5 (L2)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore"
+# $RegistryName = "RemoveWindowsStore"
+# $RegistryValue = 1  # 1 = Enabled (turn off the Store application)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.81.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Dsh"
+# $RegistryName = "AllowNewsAndInterests"
+# $RegistryValue = 0  # 0 = Disabled (Widgets feature is turned off)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.85.1.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+# $RegistryName1 = "EnableSmartScreen"
+# $RegistryValue1 = 1  # 1 = Enabled
+# $RegistryName2 = "ShellSmartScreenLevel"
+# $RegistryValue2 = "Block"  # Block = Warn and prevent bypass
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName1 -Value $RegistryValue1
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName2 -Value $RegistryValue2
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName1 -ExpectedValue $RegistryValue1
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName2 -ExpectedValue $RegistryValue2
+# } catch {
+#     Write-Host "$CisNumber - Fail" -ForegroundColor Red
+# }
+
+
+$CisNumber = "18.9.85.2.1 (L1)"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter"
+$RegistryName = "EnabledV9"
+$RegistryValue = 1  # 1 = Enabled (SmartScreen is turned on)
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
@@ -4787,7 +4960,6 @@ try {
 } catch {
     Write-Host "$CisNumber - Fail"
 }
-
 
 # Write-Host "Script execution completed. Restart may be required."
 # gpupdate
