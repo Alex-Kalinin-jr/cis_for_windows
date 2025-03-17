@@ -5001,10 +5001,89 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.89.2 (L1)"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace"
-$RegistryName = "AllowWindowsInkWorkspace"
-$RegistryValue = 1  # 1 = Enabled: On, but disallow access above lock
+# $CisNumber = "18.9.89.2 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace"
+# $RegistryName = "AllowWindowsInkWorkspace"
+# $RegistryValue = 1  # 1 = Enabled: On, but disallow access above lock
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.90.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Installer"
+# $RegistryName = "EnableUserControl"
+# $RegistryValue = 0  # 0 = Disabled (user control over installs is not allowed)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.90.2 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Installer"
+# $RegistryName = "AlwaysInstallElevated"
+# $RegistryValue = 0  # 0 = Disabled (Windows Installer 
+# #                   does not always install with elevated privileges)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.90.3 (L2)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Installer"
+# $RegistryName = "SafeForScripting"
+# $RegistryValue = 0  # 0 = Disabled (security prompts are not suppressed)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.91.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+# $RegistryName = "DisableAutomaticRestartSignOn"
+# $RegistryValue = 1  # 1 = Disabled (automatic sign-in is turned off)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.100.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging"
+# $RegistryName = "EnableScriptBlockLogging"
+# $RegistryValue = 1  # 1 = Enabled (PowerShell Script Block Logging is turned on)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.9.100.2 (L1)"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription"
+$RegistryName = "EnableTranscripting"
+$RegistryValue = 0  # 0 = Disabled (PowerShell Transcription is turned off)
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
