@@ -5314,6 +5314,19 @@ function Verify-RegistryValue {
 # }
 
 
+# $CisNumber = "18.9.108.4.2 (L1) - Part 2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
+# $RegistryName = "DeferFeatureUpdatesPeriodInDays"  # Sets deferral duration
+# $RegistryValue = 180 
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
 # $CisNumber = "19.1.3.1 (L1)"
 # $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\Control Panel\Desktop"
 # $RegistryName = "ScreenSaveActive"
@@ -5509,17 +5522,7 @@ try {
 }
 
 
-# $CisNumber = "18.9.108.4.2 (L1) - Part 2"
-# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
-# $RegistryName = "DeferFeatureUpdatesPeriodInDays"  # Sets deferral duration
-# $RegistryValue = 180 
-# try {
-#     Ensure-RegistryPath -Path $RegistryPath
-#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
-#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
-# } catch {
-#     Write-Host "$CisNumber - Fail"
-# }
+
 
 # Write-Host "Script execution completed. Restart may be required."
 # gpupdate
