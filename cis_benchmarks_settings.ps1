@@ -5288,10 +5288,166 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.108.4.1 (L1)"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
-$RegistryName = "ManagePreviewBuilds"
-$RegistryValue = 1  # 1 = Disabled (blocks preview builds)
+# $CisNumber = "18.9.108.4.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
+# $RegistryName = "ManagePreviewBuilds"
+# $RegistryValue = 1  # 1 = Disabled (blocks preview builds)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.108.4.2 (L1) - Part 1"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
+# $RegistryName = "DeferFeatureUpdates"  # Enables deferral mechanism
+# $RegistryValue = 1                     # 1 = Enabled (required for deferral to work)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.1.3.1 (L1)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\Control Panel\Desktop"
+# $RegistryName = "ScreenSaveActive"
+# $RegistryValue = "1"  # 1 = Enabled, 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.1.3.2 (L1)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\Control Panel\Desktop"
+# $RegistryName = "ScreenSaverIsSecure"
+# $RegistryValue = "1"  # 1 = Enabled (password required), 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.1.3.3 (L1)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\Control Panel\Desktop"
+# $RegistryName = "ScreenSaveTimeOut"
+# $RegistryValue = "300"  # 900 seconds = 15 minutes (CIS max recommended)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.5.1.1 (L1)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications"
+# $RegistryName = "NoToastApplicationNotificationOnLockScreen"
+# $RegistryValue = 1  # 1 = Enabled (blocks notifications), 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.6.6.1.1 (L2)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Assistance\Client\1.0"
+# $RegistryName = "NoImplicitFeedback"
+# $RegistryValue = 1  # 1 = Enabled (blocks participation), 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.7.4.1 (L1)"
+# $RegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments"
+# $RegistryName = "SaveZoneInformation"
+# $RegistryValue = 2  # 2 = Disabled (preserves zone info), 1 = Enabled (does not preserve)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.7.4.2 (L1)"
+# $RegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments"
+# $RegistryName = "ScanWithAntiVirus"
+# $RegistryValue = 3  # 3 = Enabled (notifies AV), 2 = Prompt user, 1 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.7.8.1 (L1)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\CloudContent"
+# $RegistryName = "ConfigureWindowsSpotlight"
+# $RegistryValue = 2  # 2 = Disabled, 1 = Enabled, 0 = Not configured
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.7.8.2 (L1)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\CloudContent"
+# $RegistryName = "DisableThirdPartySuggestions"
+# $RegistryValue = 1  # 1 = Enabled (blocks third-party suggestions), 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.7.8.3 (L2)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\CloudContent"
+# $RegistryName = "DisableTailoredExperiencesWithDiagnosticData"
+# $RegistryValue = 1  # 1 = Enabled (blocks personalization), 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "19.7.8.4 (L2)"
+$RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\CloudContent"
+$RegistryName = "DisableWindowsSpotlightFeatures"
+$RegistryValue = 1  # 1 = Enabled (disables all features), 0 = Disabled
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
@@ -5299,6 +5455,19 @@ try {
 } catch {
     Write-Host "$CisNumber - Fail"
 }
+
+
+# $CisNumber = "18.9.108.4.2 (L1) - Part 2"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
+# $RegistryName = "DeferFeatureUpdatesPeriodInDays"  # Sets deferral duration
+# $RegistryValue = 180 
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
 
 # Write-Host "Script execution completed. Restart may be required."
 # gpupdate
