@@ -5444,10 +5444,62 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "19.7.8.4 (L2)"
-$RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\CloudContent"
-$RegistryName = "DisableWindowsSpotlightFeatures"
-$RegistryValue = 1  # 1 = Enabled (disables all features), 0 = Disabled
+# $CisNumber = "19.7.8.4 (L2)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\CloudContent"
+# $RegistryName = "DisableWindowsSpotlightFeatures"
+# $RegistryValue = 1  # 1 = Enabled (disables all features), 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.7.8.5 (L1)"
+# $RegistryPath = "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+# $RegistryName = "DisableSpotlightCollectionOnDesktop"
+# $RegistryValue = 1  # 1 = Enabled (blocks feature), 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.7.28.1 (L1)"
+# $RegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+# $RegistryName = "NoInplaceSharing"
+# $RegistryValue = 1  # 1 = Enabled (blocks sharing), 0 = Disabled
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "19.7.43.1 (L1)"
+# $RegistryPath = "HKCU:\Software\Policies\Microsoft\Windows\Installer"
+# $RegistryName = "AlwaysInstallElevated"
+# $RegistryValue = 0  # 0 = Disabled (secure), 1 = Enabled (dangerous)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "19.7.47.2.1 (L2)"
+$RegistryPath = "HKCU:\Software\Policies\Microsoft\WindowsMediaPlayer"
+$RegistryName = "PreventCodecDownload"
+$RegistryValue = 1  # 1 = Enabled (blocks downloads), 0 = Disabled
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
