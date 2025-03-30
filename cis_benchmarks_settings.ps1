@@ -5080,10 +5080,49 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.100.2 (L1)"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription"
-$RegistryName = "EnableTranscripting"
-$RegistryValue = 0  # 0 = Disabled (PowerShell Transcription is turned off)
+# $CisNumber = "18.9.100.2 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription"
+# $RegistryName = "EnableTranscripting"
+# $RegistryValue = 0  # 0 = Disabled (PowerShell Transcription is turned off)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.102.1.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client"
+# $RegistryName = "AllowBasic"
+# $RegistryValue = 0  # 0 = Disabled (Basic authentication is not allowed)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.102.1.2 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client"
+# $RegistryName = "AllowUnencryptedTraffic"
+# $RegistryValue = 0  # 0 = Disabled (unencrypted traffic blocked)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.9.102.1.3 (L1)"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client"
+$RegistryName = "AllowDigest"
+$RegistryValue = 0  # 0 = Disabled (Digest authentication blocked)
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
