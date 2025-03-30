@@ -5119,10 +5119,179 @@ function Verify-RegistryValue {
 # }
 
 
-$CisNumber = "18.9.102.1.3 (L1)"
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client"
-$RegistryName = "AllowDigest"
-$RegistryValue = 0  # 0 = Disabled (Digest authentication blocked)
+# $CisNumber = "18.9.102.1.3 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client"
+# $RegistryName = "AllowDigest"
+# $RegistryValue = 0  # 0 = Disabled (Digest authentication blocked)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.102.2.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service"
+# $RegistryName = "AllowBasic"
+# $RegistryValue = 0  # 0 = Disabled (Basic authentication blocked)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.102.2.2 (L2)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service"
+# $RegistryName = "AllowAutoConfig"
+# $RegistryValue = 0  # 0 = Disabled (blocks automatic WinRM listener configuration)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.102.2.3 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service"
+# $RegistryName = "AllowUnencryptedTraffic"
+# $RegistryValue = 0  # 0 = Disabled (unencrypted traffic blocked)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.102.2.4 (L1)"  # Assuming this is the correct benchmark number
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service"
+# $RegistryName = "DisableRunAs"
+# $RegistryValue = 1  # 1 = Enabled (blocks storage of RunAs credentials)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.103.1 (L2)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service\WinRS"
+# $RegistryName = "AllowRemoteShellAccess"
+# $RegistryValue = 0  # 0 = Disabled (blocks Remote Shell access)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.104.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Sandbox"
+# $RegistryName = "AllowClipboardRedirection"
+# $RegistryValue = 0  # 0 = Disabled (blocks clipboard sharing)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.104.2 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Sandbox"
+# $RegistryName = "AllowNetworking"
+# $RegistryValue = 0  # 0 = Disabled (blocks network access)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.105.2.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection"
+# $RegistryName = "DisallowExploitProtectionOverride"
+# $RegistryValue = 1  # 1 = Enabled (prevents user modifications)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.108.1.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
+# $RegistryName = "NoAutoRebootWithLoggedOnUsers"
+# $RegistryValue = 0  # 0 = Disabled (enables auto-restart functionality)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.108.2.1 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
+# $RegistryName = "NoAutoUpdate"
+# $RegistryValue = 0  # 0 = Enabled (turns ON Automatic Updates)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.108.2.2 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
+# $RegistryName = "ScheduledInstallDay"
+# $RegistryValue = 0  # 0 = Every day
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+# $CisNumber = "18.9.108.2.3 (L1)"
+# $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
+# $RegistryName = "SetDisablePauseUXAccess"
+# $RegistryValue = 1  # 1 = Enabled (blocks pause functionality)
+# try {
+#     Ensure-RegistryPath -Path $RegistryPath
+#     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
+#     Verify-RegistryValue -Path $RegistryPath -Name $RegistryName -ExpectedValue $RegistryValue
+# } catch {
+#     Write-Host "$CisNumber - Fail"
+# }
+
+
+$CisNumber = "18.9.108.4.1 (L1)"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
+$RegistryName = "ManagePreviewBuilds"
+$RegistryValue = 1  # 1 = Disabled (blocks preview builds)
 try {
     Ensure-RegistryPath -Path $RegistryPath
     Set-RegistryValue -Path $RegistryPath -Name $RegistryName -Value $RegistryValue
